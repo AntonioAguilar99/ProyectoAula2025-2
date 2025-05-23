@@ -1,0 +1,99 @@
+@startuml
+
+class Empresa {
+  - String nit;
+  - String nombre;
+  - String telefono;
+  - String email;
+  - String tipo;
+  - String web;
+  - String direccion;
+  - List<Empleado>listaDeEmpleados;
+  - List<Proyecto>listaDeProyectos;
+}
+class Proyecto {
+  - String nombreClave;
+  - String denominacion;
+  - Date fechaInicio;
+  - Date fechaFin;
+  - String estado;
+  - Empresa empresa;
+  - List<Empleado>listaDeEmpleados;
+  - Promotor empleadoPromotor;
+  - List<Tarea>listaDeTareas;
+}
+class ManoDeObra {
+  - Empleado trabajador;
+  - Proyecto proyecto;
+  - Date FechaInicio;
+  - Date FechaFin;
+  - String rol;
+}
+
+class PlanDeTrabajo {
+  - Tarea tarea;
+  - Empleado trabajador;
+  - Date FechaInicio;
+  - Date FechaFin;
+  - String descripcion;
+}
+
+
+class Empleado {
+  # String dni;
+  # String nombre;
+  # String apellidos;
+  # String direccion;
+  # String telefono;
+  # String email;
+  # Date fechaContrato;
+  # Empresa empresa;
+  # List<Proyecto>listaDeProyectos;
+  # List<Tarea>listaDeTareas;
+}
+
+class Promotor {
+
+ #List<Proyecto>listaDeProyectos;
+}
+
+class Tarea {
+  - String descripción;
+  - String tipo;
+  - Date fechaInicioEstimado;
+  - Date fechaInicioReal;
+  - int duraciónEstimada;
+  - int duraciónReal;
+  - List<Empleado>listaDeEmpleados;
+  - Proyecto proyecto;
+  - List<Documento>listDeDocumentos;
+}
+class Documento {
+  - String codigo;
+  - String descripcion;
+  - String tipo;
+  - Tarea tarea;
+  - List<Version>listaDeVersiones;
+}
+class Version {
+  - Date fecha;
+  - String descripcion;
+  - File archivo;
+  - Documento documento;
+}
+Empleado "*" -- "1" Empresa : Trabaja
+Empleado <|-- Promotor : Es un
+Proyecto "*" -- "1" Empresa : Tiene
+Proyecto "*" -- "1" Promotor : Promueve
+Proyecto "1" -- "*" Tarea : Conformado
+Tarea "1" -- "*" Documento : Genera
+Documento "1" -- "*" Version : Tiene
+
+Empleado "*" -- "*" Proyecto : Trabaja
+(Empleado, Proyecto) .. ManoDeObra
+
+Empleado "*" -- "*" Tarea : Realiza
+(Empleado, Tarea) .. PlanDeTrabajo
+
+
+@enduml

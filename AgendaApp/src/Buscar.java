@@ -126,7 +126,7 @@ public class Buscar extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(39, 39, 39))
             .addGroup(layout.createSequentialGroup()
-                .addGap(371, 371, 371)
+                .addGap(366, 366, 366)
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
